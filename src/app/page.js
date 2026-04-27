@@ -1,5 +1,12 @@
 // src/app/page.js
-import CanvasLayer from "../components/CanvasLayer";
+'use client'; // 죠스타!! 이 한 줄이 제왕의 선언 다앗!!
+
+import dynamic from 'next/dynamic';
+
+// 캔버스는 오직 클라이언트(브라우저)에서만 현현한다! SSR은 무시해라!
+const CanvasLayer = dynamic(() => import("../components/CanvasLayer"), { 
+  ssr: false 
+});
 
 export default function Home() {
   return (
@@ -9,7 +16,7 @@ export default function Home() {
         LEEGANGGEON
       </h1>
       
-      {/* 실시간 텍스트 리플로우가 일어날 도화지! */}
+      {/* 이제 브라우저가 켜진 후에만 안전하게 캔버스가 현현한다! */}
       <CanvasLayer />
     </main>
   );
